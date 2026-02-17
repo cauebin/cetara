@@ -144,7 +144,7 @@ const Hero = () => {
 
 const About = () => {
   return (
-    <section id="conceito" className="py-24 md:py-32 bg-[#EBE5DE]">
+    <section id="conceito" className="scroll-mt-40 py-24 md:py-32 bg-[#EBE5DE]">
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className="order-2 md:order-1">
@@ -225,7 +225,7 @@ const Features = () => {
 
 const Projects = () => {
   return (
-    <section id="projetos" className="py-24 bg-white">
+    <section id="projetos" className="scroll-mt-40 py-24 bg-white">
       <div className="container mx-auto px-6">
         <div className="flex justify-between items-end mb-16">
           <div>
@@ -271,7 +271,7 @@ const Projects = () => {
 
 const Contact = () => {
   return (
-    <section id="contato" className="py-6 bg-[#1A1A1A] text-[#F3EFE9]">
+    <section id="contato" className="scroll-mt-40 py-6 bg-[#1A1A1A] text-[#F3EFE9]">
       <div className="container mx-auto px-6 text-center">
         <div className="mb-2 flex justify-center opacity-80">
             <FooterLogo 
