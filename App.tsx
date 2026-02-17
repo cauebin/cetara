@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Logo, LogoText } from './components/Logo';
+import { Logo, LogoText, FooterLogo } from './components/Logo';
 import { 
   IconInstagram, 
   IconLinkedin, 
@@ -52,7 +52,7 @@ const Navbar = () => {
   return (
     <nav 
       className={`fixed w-full z-50 transition-all duration-500 ${
-        scrolled ? 'bg-[#F3EFE9]/95 backdrop-blur-sm shadow-sm py-4' : 'bg-transparent py-8'
+        scrolled ? 'bg-[#F3EFE9]/95 backdrop-blur-sm shadow-sm py-2' : 'bg-transparent py-4'
       }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
@@ -271,13 +271,17 @@ const Projects = () => {
 
 const Contact = () => {
   return (
-    <section id="contato" className="py-24 bg-[#1A1A1A] text-[#F3EFE9]">
+    <section id="contato" className="py-6 bg-[#1A1A1A] text-[#F3EFE9]">
       <div className="container mx-auto px-6 text-center">
-        <div className="mb-8 flex justify-center opacity-80">
-            <Logo width={150} height={100} className="text-[#F3EFE9]" />
+        <div className="mb-2 flex justify-center opacity-80">
+            <FooterLogo 
+              width={300} 
+              height={200} 
+              className="text-[#F3EFE9] [&_svg]:max-w-full [&_svg]:h-auto" 
+            />
         </div>
         
-        <h2 className="font-serif text-3xl md:text-5xl mb-8">Vamos conversar sobre o seu futuro?</h2>
+        <h2 className="font-serif text-3xl md:text-5xl mb-6">Vamos conversar sobre o seu futuro?</h2>
         
         <p className="font-sans font-light text-gray-400 mb-12 max-w-xl mx-auto">
           Entre em contato para saber mais sobre nossos projetos em andamento e oportunidades de investimento em Itupeva.
