@@ -119,13 +119,6 @@ const Navbar = () => {
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-      <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
-         {/* Abstract background line pattern */}
-         <svg width="100%" height="100%">
-            <line x1="50%" y1="0" x2="50%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-gray-400" />
-         </svg>
-      </div>
-
       <div className="container mx-auto px-6 z-10 text-center flex flex-col items-center">
         <div className="fade-in-up">
           <Logo width={280} height={160} className="mb-4 md:mb-8 scale-110" />
@@ -135,8 +128,8 @@ const Hero = () => {
         
         <div className="w-24 h-[1px] bg-cetara-dark my-8 fade-in-up delay-200"></div>
 
-        <p className="fade-in-up delay-500 font-serif text-xl md:text-3xl italic text-gray-700 tracking-wide">
-          "Arquitetura de permanência"
+        <p className="fade-in-up delay-500 font-baskerville text-xl md:text-2xl text-gray-700 tracking-wide">
+          arquitetura de permanência
         </p>
       </div>
 
