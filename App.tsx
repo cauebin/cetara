@@ -58,7 +58,7 @@ const Navbar = () => {
       <div className="container mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
         <a href="#" className="flex items-center gap-3 group">
-          <Logo width={100} height={60} className="transition-transform group-hover:scale-105" />
+          <Logo width={160} height={90} className="transition-transform group-hover:scale-105" />
         </a>
 
         {/* Desktop Menu */}
