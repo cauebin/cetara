@@ -58,7 +58,7 @@ const Navbar = () => {
       <div className="container mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
         <a href="#" className="flex items-center gap-3 group">
-          <Logo width={160} height={90} className="transition-transform group-hover:scale-105" />
+          <Logo width={200} height={113} className="transition-transform group-hover:scale-105" />
         </a>
 
         {/* Desktop Menu */}
@@ -274,7 +274,7 @@ const Contact = () => {
     <section id="contato" className="py-24 bg-[#1A1A1A] text-[#F3EFE9]">
       <div className="container mx-auto px-6 text-center">
         <div className="mb-8 flex justify-center opacity-80">
-            <Logo width={120} height={80} className="text-[#F3EFE9]" />
+            <Logo width={150} height={100} className="text-[#F3EFE9]" />
         </div>
         
         <h2 className="font-serif text-3xl md:text-5xl mb-8">Vamos conversar sobre o seu futuro?</h2>
