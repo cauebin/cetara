@@ -12,11 +12,11 @@
     <meta property="og:title" content="Cetara Residences | Arquitetura de Permanência" />
     <meta property="og:description" content="Casas de luxo e design autoral em condomínios fechados em Itupeva e região." />
     
-    <!-- OG Image: Pointing to apple-touch-icon.png (256x256) as requested -->
+    <!-- OG Image: Pointing to apple-touch-icon.png (180x180) as requested -->
     <meta property="og:image" content="apple-touch-icon.png" />
     <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="256" />
-    <meta property="og:image:height" content="256" />
+    <meta property="og:image:width" content="180" />
+    <meta property="og:image:height" content="180" />
     <meta property="og:site_name" content="Cetara Residences" />
 
     <!-- Twitter -->
@@ -34,8 +34,13 @@
     
     <!-- Icons -->
     <link rel="manifest" href="manifest.json" />
+    
+    <!-- Priority for PNG icon (180x180) for browsers and iOS -->
+    <link rel="icon" type="image/png" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    
+    <!-- Fallback SVG icon -->
     <link rel="icon" type="image/svg+xml" href="icon.svg" sizes="any" />
-    <link rel="apple-touch-icon" sizes="256x256" href="apple-touch-icon.png" />
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -108,24 +113,22 @@
     <!-- Fallback Script: Tries to generate the icon client-side for iOS users if the PNG is missing -->
     <script>
       window.addEventListener('load', function() {
-        // Only run if the static link fails or we want to ensure high-res support
         const img = new Image();
         img.crossOrigin = 'Anonymous';
         img.onload = function() {
           try {
             const canvas = document.createElement('canvas');
-            canvas.width = 256;
-            canvas.height = 256;
+            canvas.width = 180;
+            canvas.height = 180;
             const ctx = canvas.getContext('2d');
             
             // Draw background
             ctx.fillStyle = '#F3EFE9';
-            ctx.fillRect(0, 0, 256, 256);
+            ctx.fillRect(0, 0, 180, 180);
             
             // Draw SVG
-            ctx.drawImage(img, 0, 0, 256, 256);
+            ctx.drawImage(img, 0, 0, 180, 180);
             
-            // Note: This script runs in the browser, it won't affect WhatsApp crawler which needs the physical file
           } catch (e) {
             console.error('Icon generation check', e);
           }
