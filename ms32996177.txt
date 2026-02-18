@@ -1,0 +1,5 @@
+{
+  "Description": "Ficheiro de verificação de propriedade do domínio para o Microsoft 365 – colocar na raiz do site",
+  "Domain": "cetara.com.br",
+  "Id": "50e92d0f-5965-4972-b6f4-432552f9ca2e"
+}
