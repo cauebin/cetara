@@ -118,7 +118,7 @@ const ScrollToTop = () => {
   return null;
 };
 
-const NavButton = ({ children, onClick }: { children: React.ReactNode, onClick: () => void }) => (
+const NavButton = ({ children, onClick }: { children?: React.ReactNode, onClick: () => void }) => (
   <button 
     onClick={onClick}
     className="block text-sm tracking-widest uppercase hover:text-gray-500 transition-colors duration-300 py-2 md:py-0 cursor-pointer bg-transparent border-none p-0"
@@ -429,7 +429,10 @@ const Footer = () => {
       <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-xs uppercase tracking-widest">
         <div className="mb-6 md:mb-0 flex flex-col items-center md:items-start gap-2">
           <span>&copy; {new Date().getFullYear()} Cetara Residences.</span>
-          <span className="text-[10px] opacity-50">Bincorp Engenharia e Servicos LTDA - CNPJ 27.459.012/0001-35</span>
+          <div className="flex flex-col items-center md:items-start">
+            <span className="text-[10px] opacity-50">Bincorp Engenharia e Servicos LTDA</span>
+            <span className="text-[10px] opacity-50">CNPJ 27.459.012/0001-35</span>
+          </div>
         </div>
         <div className="flex gap-6">
           <a href="#" className="hover:text-gray-400">Política de Privacidade</a>
