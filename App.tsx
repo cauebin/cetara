@@ -156,14 +156,6 @@ const Navbar = () => {
     }
   };
 
-  const handleLogoClick = (e: React.MouseEvent) => {
-    if (location.pathname === '/') {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    setIsOpen(false);
-  };
-
   return (
     <nav 
       className={`fixed w-full z-50 transition-all duration-500 ${
@@ -171,8 +163,15 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
-        {/* Logo */}
-        <Link to="/" onClick={handleLogoClick} className="flex items-center gap-3 group">
+        {/* Logo - Link to Home */}
+        <Link 
+          to="/"
+          onClick={() => {
+            setIsOpen(false);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className="flex items-center gap-3 group"
+        >
           <Logo width={200} height={113} className="transition-transform group-hover:scale-105" />
         </Link>
 

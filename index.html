@@ -11,18 +11,18 @@
     <meta property="og:url" content="https://cetara.residences/" />
     <meta property="og:title" content="Cetara Residences | Arquitetura de Permanência" />
     <meta property="og:description" content="Casas de luxo e design autoral em condomínios fechados em Itupeva e região." />
-    <!-- Dynamic OG Image handling will be done via server usually, but we keep the reference for when the file exists -->
-    <meta property="og:image" content="apple-touch-icon.png?v=4" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="256" />
-    <meta property="og:image:height" content="256" />
+    <!-- OG Image matches icon generation logic -->
+    <meta property="og:image" content="icon.svg" />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:width" content="180" />
+    <meta property="og:image:height" content="180" />
     <meta property="og:site_name" content="Cetara Residences" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Cetara Residences | Arquitetura de Permanência" />
     <meta name="twitter:description" content="Casas de luxo e design autoral em condomínios fechados em Itupeva e região." />
-    <meta name="twitter:image" content="apple-touch-icon.png?v=4" />
+    <meta name="twitter:image" content="icon.svg" />
 
     <!-- Theme Color for Mobile Browsers -->
     <meta name="theme-color" content="#F3EFE9" />
@@ -35,9 +35,8 @@
     <link rel="manifest" href="manifest.json" />
     <link rel="icon" type="image/svg+xml" href="icon.svg" sizes="any" />
     
-    <!-- iOS Home Screen Icon - JS will update this to a valid PNG data URI -->
-    <link id="ios-icon" rel="apple-touch-icon" sizes="180x180" href="icon.svg" />
-    <link rel="mask-icon" href="icon.svg" color="#1A1A1A" />
+    <!-- iOS Home Screen Icon: Generated dynamically via JS below -->
+    <!-- We do not include a static link tag here to avoid iOS picking up the SVG or a 404 PNG -->
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -109,30 +108,45 @@
     
     <!-- Script to auto-generate PNG icon for iOS from SVG -->
     <script>
-      (function() {
-        const link = document.getElementById('ios-icon');
+      window.addEventListener('load', function() {
         const img = new Image();
+        img.crossOrigin = 'Anonymous';
         img.onload = function() {
-          const canvas = document.createElement('canvas');
-          canvas.width = 180;
-          canvas.height = 180;
-          const ctx = canvas.getContext('2d');
-          // Draw white background first (optional, but good for safety)
-          ctx.fillStyle = '#F3EFE9';
-          ctx.fillRect(0, 0, 180, 180);
-          // Draw the SVG image
-          ctx.drawImage(img, 0, 0, 180, 180);
-          // Convert to PNG data URI
           try {
+            const canvas = document.createElement('canvas');
+            canvas.width = 180;
+            canvas.height = 180;
+            const ctx = canvas.getContext('2d');
+            
+            // Draw background
+            ctx.fillStyle = '#F3EFE9';
+            ctx.fillRect(0, 0, 180, 180);
+            
+            // Draw SVG
+            ctx.drawImage(img, 0, 0, 180, 180);
+            
+            // Create PNG Data URI
             const pngUrl = canvas.toDataURL('image/png');
+            
+            // Create and append link tag
+            const link = document.createElement('link');
+            link.rel = 'apple-touch-icon';
+            link.sizes = '180x180';
             link.href = pngUrl;
+            document.head.appendChild(link);
+            
+            // Also add precomposed version
+            const linkPre = document.createElement('link');
+            linkPre.rel = 'apple-touch-icon-precomposed';
+            linkPre.href = pngUrl;
+            document.head.appendChild(linkPre);
+            
           } catch (e) {
-            console.warn('Could not generate dynamic icon', e);
+            console.error('Failed to generate iOS icon', e);
           }
         };
-        // Load the existing SVG
         img.src = 'icon.svg';
-      })();
+      });
     </script>
   </body>
 </html>
