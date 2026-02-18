@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { HashRouter, Routes, Route, Link, useParams, useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route, Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import { Logo, LogoText, FooterLogo } from './components/Logo';
 import { 
   IconInstagram, 
@@ -15,7 +15,8 @@ import {
   IconBath,
   IconRuler,
   IconMaximize,
-  IconCheck
+  IconCheck,
+  IconMail
 } from './components/Icons';
 
 // --- Types ---
@@ -32,13 +33,6 @@ interface ProjectData {
   diferenciais: string[];
   mainImage: string;
   gallery: string[];
-}
-
-interface NavLinkProps {
-  href: string;
-  children: React.ReactNode;
-  onClick?: () => void;
-  isHashLink?: boolean;
 }
 
 // --- Data ---
@@ -110,7 +104,8 @@ const PROJECTS: ProjectData[] = [
 const LINKS = {
   instagram: "https://instagram.com/cetara.residences",
   linkedin: "https://linkedin.com/company/cetararesidences",
-  whatsapp: "https://wa.me/5511996090377?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20Cetara%20Residences."
+  whatsapp: "https://wa.me/5511996090377?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20Cetara%20Residences.",
+  email: "mailto:caue@cetara.com.br"
 };
 
 // --- Components ---
@@ -123,27 +118,20 @@ const ScrollToTop = () => {
   return null;
 };
 
-const NavLink: React.FC<NavLinkProps> = ({ href, children, onClick, isHashLink = true }) => {
-  const Component = isHashLink ? 'a' : Link;
-  const props = isHashLink ? { href } : { to: href };
-  
-  return (
-    // @ts-ignore
-    <Component 
-      {...props}
-      onClick={onClick}
-      className="block text-sm tracking-widest uppercase hover:text-gray-500 transition-colors duration-300 py-2 md:py-0 cursor-pointer"
-    >
-      {children}
-    </Component>
-  );
-};
+const NavButton = ({ children, onClick }: { children: React.ReactNode, onClick: () => void }) => (
+  <button 
+    onClick={onClick}
+    className="block text-sm tracking-widest uppercase hover:text-gray-500 transition-colors duration-300 py-2 md:py-0 cursor-pointer bg-transparent border-none p-0"
+  >
+    {children}
+  </button>
+);
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const isHome = location.pathname === '/';
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -153,8 +141,20 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Helper to handle navigation correctly whether on home or inner page
-  const getLink = (hash: string) => isHome ? hash : `/${hash}`;
+  const handleNavigation = (id: string) => {
+    setIsOpen(false);
+    
+    if (location.pathname === '/') {
+      // If we are already home, just scroll
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If we are not home, navigate home and pass the target id
+      navigate('/', { state: { targetId: id } });
+    }
+  };
 
   return (
     <nav 
@@ -170,9 +170,9 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-12">
-          <NavLink href={getLink('#conceito')}>Conceito</NavLink>
-          <NavLink href={getLink('#projetos')}>Projetos</NavLink>
-          <NavLink href={getLink('#contato')}>Contato</NavLink>
+          <NavButton onClick={() => handleNavigation('conceito')}>Conceito</NavButton>
+          <NavButton onClick={() => handleNavigation('projetos')}>Projetos</NavButton>
+          <NavButton onClick={() => handleNavigation('contato')}>Contato</NavButton>
           
           <div className="flex items-center gap-4">
             <a 
@@ -203,10 +203,10 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div className="absolute top-full left-0 w-full bg-[#F3EFE9] border-t border-gray-200 shadow-lg p-6 md:hidden flex flex-col space-y-4">
-          <NavLink href={getLink('#conceito')} onClick={() => setIsOpen(false)}>Conceito</NavLink>
-          <NavLink href={getLink('#projetos')} onClick={() => setIsOpen(false)}>Projetos</NavLink>
-          <NavLink href={getLink('#contato')} onClick={() => setIsOpen(false)}>Contato</NavLink>
+        <div className="absolute top-full left-0 w-full bg-[#F3EFE9] border-t border-gray-200 shadow-lg p-6 md:hidden flex flex-col space-y-4 text-center md:text-left">
+          <NavButton onClick={() => handleNavigation('conceito')}>Conceito</NavButton>
+          <NavButton onClick={() => handleNavigation('projetos')}>Projetos</NavButton>
+          <NavButton onClick={() => handleNavigation('contato')}>Contato</NavButton>
           <div className="flex flex-col items-center gap-4 mt-4">
             <a 
               href={LINKS.whatsapp}
@@ -249,7 +249,7 @@ const Hero = () => {
 
 const About = () => {
   return (
-    <section id="conceito" className="scroll-mt-20 py-24 md:py-32 bg-[#EBE5DE]">
+    <section id="conceito" className="scroll-mt-32 py-24 md:py-32 bg-[#EBE5DE]">
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className="order-2 md:order-1">
@@ -330,7 +330,7 @@ const Features = () => {
 
 const Projects = () => {
   return (
-    <section id="projetos" className="scroll-mt-20 py-24 bg-white">
+    <section id="projetos" className="scroll-mt-32 py-24 bg-white">
       <div className="container mx-auto px-6">
         <div className="flex justify-between items-end mb-16">
           <div>
@@ -408,6 +408,10 @@ const Contact = () => {
             <IconWhatsapp size={24} />
             <span className="sr-only">WhatsApp</span>
           </a>
+          <a href={LINKS.email} className="hover:text-white text-gray-500 transition-colors">
+            <IconMail size={24} />
+            <span className="sr-only">Email</span>
+          </a>
         </div>
       </div>
     </section>
@@ -418,8 +422,9 @@ const Footer = () => {
   return (
     <footer className="bg-[#151515] text-gray-600 py-12 border-t border-gray-800">
       <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-xs uppercase tracking-widest">
-        <div className="mb-4 md:mb-0">
-          &copy; {new Date().getFullYear()} Cetara Residences.
+        <div className="mb-6 md:mb-0 flex flex-col items-center md:items-start gap-2">
+          <span>&copy; {new Date().getFullYear()} Cetara Residences.</span>
+          <span className="text-[10px] opacity-50">Bincorp Engenharia e Servicos LTDA - CNPJ 27.459.012/0001-35</span>
         </div>
         <div className="flex gap-6">
           <a href="#" className="hover:text-gray-400">Política de Privacidade</a>
@@ -432,14 +437,33 @@ const Footer = () => {
 
 // --- Pages ---
 
-const HomePage = () => (
-  <>
-    <Hero />
-    <About />
-    <Features />
-    <Projects />
-  </>
-);
+const HomePage = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Check if we have a targetId to scroll to coming from a navigation event
+    if (location.state && (location.state as any).targetId) {
+      const targetId = (location.state as any).targetId;
+      const elem = document.getElementById(targetId);
+      
+      // Use a small timeout to allow layout to settle if needed, though usually immediate is fine
+      setTimeout(() => {
+        if (elem) {
+          elem.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [location]);
+
+  return (
+    <>
+      <Hero />
+      <About />
+      <Features />
+      <Projects />
+    </>
+  );
+};
 
 const ProjectPage = () => {
   const { id } = useParams();
@@ -616,6 +640,7 @@ const ProjectPage = () => {
           <StatBox icon={IconBath} label="Banheiros" value={project.banheiros} />
         </div>
 
+        {/* Description & Differentials */}
         <div className="grid md:grid-cols-2 gap-16 mb-20">
           {/* Description */}
           <div className="space-y-6">

@@ -6,7 +6,7 @@ import {
   Menu, 
   X, 
   ArrowRight, 
-  ArrowLeft,
+  ArrowLeft, 
   MapPin, 
   Home, 
   Bed, 
@@ -14,6 +14,7 @@ import {
   Ruler, 
   Maximize, 
   CheckCircle2,
+  Mail,
   LucideProps 
 } from 'lucide-react';
 
@@ -31,3 +32,4 @@ export const IconBath = (props: LucideProps) => <Bath {...props} />;
 export const IconRuler = (props: LucideProps) => <Ruler {...props} />;
 export const IconMaximize = (props: LucideProps) => <Maximize {...props} />;
 export const IconCheck = (props: LucideProps) => <CheckCircle2 {...props} />;
+export const IconMail = (props: LucideProps) => <Mail {...props} />;
