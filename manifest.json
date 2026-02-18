@@ -1,0 +1,20 @@
+{
+  "short_name": "Cetara",
+  "name": "Cetara Residences",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512 192x192 48x48"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "180x180"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#F3EFE9",
+  "background_color": "#F3EFE9"
+}
