@@ -8,8 +8,8 @@
       "sizes": "512x512 192x192 48x48"
     },
     {
-      "src": "apple-touch-icon.png",
-      "type": "image/png",
+      "src": "icon.svg",
+      "type": "image/svg+xml",
       "sizes": "180x180"
     }
   ],

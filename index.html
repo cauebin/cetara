@@ -11,17 +11,18 @@
     <meta property="og:url" content="https://cetara.residences/" />
     <meta property="og:title" content="Cetara Residences | Arquitetura de Permanência" />
     <meta property="og:description" content="Casas de luxo e design autoral em condomínios fechados em Itupeva e região." />
-    <meta property="og:image" content="apple-touch-icon.png?v=2" />
+    <!-- Dynamic OG Image handling will be done via server usually, but we keep the reference for when the file exists -->
+    <meta property="og:image" content="apple-touch-icon.png?v=4" />
     <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="512" />
-    <meta property="og:image:height" content="512" />
+    <meta property="og:image:width" content="256" />
+    <meta property="og:image:height" content="256" />
     <meta property="og:site_name" content="Cetara Residences" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Cetara Residences | Arquitetura de Permanência" />
     <meta name="twitter:description" content="Casas de luxo e design autoral em condomínios fechados em Itupeva e região." />
-    <meta name="twitter:image" content="apple-touch-icon.png?v=2" />
+    <meta name="twitter:image" content="apple-touch-icon.png?v=4" />
 
     <!-- Theme Color for Mobile Browsers -->
     <meta name="theme-color" content="#F3EFE9" />
@@ -34,9 +35,8 @@
     <link rel="manifest" href="manifest.json" />
     <link rel="icon" type="image/svg+xml" href="icon.svg" sizes="any" />
     
-    <!-- iOS Home Screen Icon - Must be a PNG -->
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2" />
-    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png?v=2" />
+    <!-- iOS Home Screen Icon - JS will update this to a valid PNG data URI -->
+    <link id="ios-icon" rel="apple-touch-icon" sizes="180x180" href="icon.svg" />
     <link rel="mask-icon" href="icon.svg" color="#1A1A1A" />
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -106,5 +106,33 @@
   <body>
     <div id="root"></div>
     <script type="module" src="./index.tsx"></script>
+    
+    <!-- Script to auto-generate PNG icon for iOS from SVG -->
+    <script>
+      (function() {
+        const link = document.getElementById('ios-icon');
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          canvas.width = 180;
+          canvas.height = 180;
+          const ctx = canvas.getContext('2d');
+          // Draw white background first (optional, but good for safety)
+          ctx.fillStyle = '#F3EFE9';
+          ctx.fillRect(0, 0, 180, 180);
+          // Draw the SVG image
+          ctx.drawImage(img, 0, 0, 180, 180);
+          // Convert to PNG data URI
+          try {
+            const pngUrl = canvas.toDataURL('image/png');
+            link.href = pngUrl;
+          } catch (e) {
+            console.warn('Could not generate dynamic icon', e);
+          }
+        };
+        // Load the existing SVG
+        img.src = 'icon.svg';
+      })();
+    </script>
   </body>
 </html>
