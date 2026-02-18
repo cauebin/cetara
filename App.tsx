@@ -7,7 +7,7 @@ import {
   IconWhatsapp, 
   IconMenu, 
   IconClose, 
-  IconArrowRight,
+  IconArrowRight, 
   IconArrowLeft,
   IconMapPin, 
   IconHome,
@@ -156,6 +156,14 @@ const Navbar = () => {
     }
   };
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    if (location.pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    setIsOpen(false);
+  };
+
   return (
     <nav 
       className={`fixed w-full z-50 transition-all duration-500 ${
@@ -164,7 +172,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group">
+        <Link to="/" onClick={handleLogoClick} className="flex items-center gap-3 group">
           <Logo width={200} height={113} className="transition-transform group-hover:scale-105" />
         </Link>
 
@@ -249,7 +257,7 @@ const Hero = () => {
 
 const About = () => {
   return (
-    <section id="conceito" className="scroll-mt-32 py-24 md:py-32 bg-[#EBE5DE]">
+    <section id="conceito" className="scroll-mt-10 py-24 md:py-32 bg-[#EBE5DE]">
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className="order-2 md:order-1">
@@ -330,16 +338,13 @@ const Features = () => {
 
 const Projects = () => {
   return (
-    <section id="projetos" className="scroll-mt-32 py-24 bg-white">
+    <section id="projetos" className="scroll-mt-[60px] py-24 bg-white">
       <div className="container mx-auto px-6">
         <div className="flex justify-between items-end mb-16">
           <div>
             <span className="text-xs uppercase tracking-[0.3em] text-gray-500 mb-2 block">Portfolio</span>
             <h2 className="font-serif text-3xl md:text-4xl text-cetara-dark">Breve Lançamento</h2>
           </div>
-          <a href={LINKS.whatsapp} className="hidden md:block text-xs uppercase tracking-widest border-b border-gray-300 hover:border-black pb-1 transition-all">
-            Ver detalhes
-          </a>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
