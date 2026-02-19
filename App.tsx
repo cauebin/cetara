@@ -177,7 +177,7 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-12">
-          <NavButton onClick={() => handleNavigation('conceito')}>Conceito</NavButton>
+          <NavButton onClick={() => handleNavigation('conceito')}>História</NavButton>
           <NavButton onClick={() => handleNavigation('projetos')}>Projetos</NavButton>
           <NavButton onClick={() => handleNavigation('contato')}>Contato</NavButton>
           
@@ -211,7 +211,7 @@ const Navbar = () => {
       {/* Mobile Menu Overlay */}
       {isOpen && (
         <div className="absolute top-full left-0 w-full bg-[#F3EFE9] border-t border-gray-200 shadow-lg p-6 md:hidden flex flex-col space-y-4 text-center md:text-left">
-          <NavButton onClick={() => handleNavigation('conceito')}>Conceito</NavButton>
+          <NavButton onClick={() => handleNavigation('conceito')}>História</NavButton>
           <NavButton onClick={() => handleNavigation('projetos')}>Projetos</NavButton>
           <NavButton onClick={() => handleNavigation('contato')}>Contato</NavButton>
           <div className="flex flex-col items-center gap-4 mt-4">
@@ -287,9 +287,9 @@ const About = () => {
             </p>
             
             <div className="pt-4">
-              <a href={LINKS.whatsapp} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border-b border-cetara-dark pb-1 hover:opacity-60 transition-opacity uppercase text-sm tracking-widest">
+              <Link to="/sobre" className="inline-flex items-center gap-2 border-b border-cetara-dark pb-1 hover:opacity-60 transition-opacity uppercase text-sm tracking-widest">
                 Saiba Mais <IconArrowRight size={16} />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -373,9 +373,19 @@ const Projects = () => {
 
 const Contact = () => {
   return (
-    <section id="contato" className="scroll-mt-20 py-6 bg-[#1A1A1A] text-[#F3EFE9]">
-      <div className="container mx-auto px-6 text-center">
-        <div className="mb-2 flex justify-center opacity-80">
+    <section id="contato" className="scroll-mt-20 py-16 bg-[#1A1A1A] text-[#F3EFE9] relative overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="https://picsum.photos/1920/1080?image=1048" 
+          alt="Background" 
+          className="w-full h-full object-cover opacity-10"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A1A] via-[#1A1A1A]/95 to-[#1A1A1A]"></div>
+      </div>
+
+      <div className="container mx-auto px-6 text-center relative z-10">
+        <div className="mb-6 flex justify-center opacity-80">
             <FooterLogo 
               width={300} 
               height={200} 
@@ -717,6 +727,106 @@ const ProjectPage = () => {
   );
 };
 
+const AboutPage = () => {
+  return (
+    <div className="pt-32 pb-20 bg-[#F3EFE9]">
+      <div className="container mx-auto px-6">
+        {/* Header / History */}
+        <div className="max-w-4xl mx-auto text-center mb-20">
+          <span className="text-xs uppercase tracking-[0.3em] text-gray-500 mb-4 block">Nossa Trajetória</span>
+          <h1 className="font-serif text-4xl md:text-6xl text-cetara-dark mb-8">22 Anos de Excelência</h1>
+          <div className="w-24 h-[1px] bg-cetara-dark mx-auto mb-8"></div>
+          <p className="font-sans font-light text-xl text-gray-700 leading-relaxed">
+            Há mais de duas décadas, a Cetara Residences tem sido sinônimo de qualidade e sofisticação no mercado imobiliário. 
+            Nossa jornada é marcada pelo compromisso inabalável com a excelência, transformando projetos em lares que atravessam gerações. 
+            Cada traço, cada material e cada detalhe é pensado para oferecer não apenas uma casa, mas um legado de bem viver.
+          </p>
+        </div>
+
+        {/* Mission, Vision, Values */}
+        <div className="grid md:grid-cols-3 gap-12 mb-24 border-y border-gray-300 py-16">
+          <div className="text-center px-4">
+            <h3 className="font-serif text-2xl mb-4 text-cetara-dark">Missão</h3>
+            <p className="font-sans font-light text-gray-600">
+              Desenvolver residências de alto padrão que integrem design autoral, conforto absoluto e respeito ao meio ambiente, proporcionando experiências únicas de moradia.
+            </p>
+          </div>
+          <div className="text-center px-4 md:border-l md:border-r border-gray-300">
+            <h3 className="font-serif text-2xl mb-4 text-cetara-dark">Visão</h3>
+            <p className="font-sans font-light text-gray-600">
+              Ser reconhecida como a principal referência em arquitetura de permanência e incorporação de luxo no interior de São Paulo, definindo novos padrões de qualidade.
+            </p>
+          </div>
+          <div className="text-center px-4">
+            <h3 className="font-serif text-2xl mb-4 text-cetara-dark">Valores</h3>
+            <p className="font-sans font-light text-gray-600">
+              Ética, transparência, inovação constante, valorização humana e compromisso com a sustentabilidade e a perenidade de nossas obras.
+            </p>
+          </div>
+        </div>
+
+        {/* Team Section */}
+        <div className="mb-16">
+          <div className="text-center mb-16">
+            <span className="text-xs uppercase tracking-[0.3em] text-gray-500 mb-2 block">Quem Faz Acontecer</span>
+            <h2 className="font-serif text-3xl md:text-4xl text-cetara-dark">Nossa Equipe</h2>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {/* Team Member 1 */}
+            <div className="group">
+              <div className="overflow-hidden mb-6 h-[400px] bg-gray-200">
+                <img 
+                  src="https://picsum.photos/600/800?image=1027" 
+                  alt="Membro da Equipe" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0"
+                />
+              </div>
+              <h3 className="font-serif text-2xl mb-1">Carlos Eduardo</h3>
+              <p className="text-xs uppercase tracking-widest text-gray-500 mb-4">CEO & Fundador</p>
+              <p className="font-sans font-light text-sm text-gray-600">
+                Visionário com 22 anos de experiência no mercado, lidera a Cetara com foco em inovação e qualidade construtiva.
+              </p>
+            </div>
+
+            {/* Team Member 2 */}
+            <div className="group">
+              <div className="overflow-hidden mb-6 h-[400px] bg-gray-200">
+                <img 
+                  src="https://picsum.photos/600/800?image=1011" 
+                  alt="Membro da Equipe" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0"
+                />
+              </div>
+              <h3 className="font-serif text-2xl mb-1">Ana Paula</h3>
+              <p className="text-xs uppercase tracking-widest text-gray-500 mb-4">Diretora de Arquitetura</p>
+              <p className="font-sans font-light text-sm text-gray-600">
+                Arquiteta premiada, responsável por traduzir sonhos em projetos tangíveis, com um olhar único para estética e funcionalidade.
+              </p>
+            </div>
+
+            {/* Team Member 3 */}
+            <div className="group">
+              <div className="overflow-hidden mb-6 h-[400px] bg-gray-200">
+                <img 
+                  src="https://picsum.photos/600/800?image=1005" 
+                  alt="Membro da Equipe" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0"
+                />
+              </div>
+              <h3 className="font-serif text-2xl mb-1">Roberto Almeida</h3>
+              <p className="text-xs uppercase tracking-widest text-gray-500 mb-4">Engenheiro Chefe</p>
+              <p className="font-sans font-light text-sm text-gray-600">
+                Garante que cada projeto seja executado com precisão técnica e rigor, assegurando a durabilidade e segurança de cada obra.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // --- App Root ---
 
 const App: React.FC = () => {
@@ -728,6 +838,7 @@ const App: React.FC = () => {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/sobre" element={<AboutPage />} />
             <Route path="/projeto/:id" element={<ProjectPage />} />
           </Routes>
         </main>
